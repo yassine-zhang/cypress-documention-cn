@@ -2,10 +2,14 @@
     <div class="sidebar">
         <ul>
             <!-- 一级栏目外 -->
-            <li v-for="(item, item_index) in props.data" :key="item.title" :class="['sidebar_item', (!props.first ? 'mt-1' : ''), 'pb-1']">
-                <div class="sidebar_header px-3 py-1 mb-1 hover:bg-[#eaeaea] transition-colors ease-in-out rounded cursor-pointer" :data-url="item.url">
+            <li v-for="(item, item_index) in props.data" :key="item.title" :class="['sidebar_item', (item_index ? 'mt-1' : ''), 'pb-1']">
+                <div class="sidebar_header flex justify-between px-3 py-1 mb-1 hover:bg-[#eaeaea] transition-colors ease-in-out rounded cursor-pointer" :data-url="item.url">
                     <!-- text-[#275d3c] -->
-                    <p :class="['flex justify-between items-center font-medium text-[1.05rem]', (!item_index ? 'text-[#275d3c]' : 'text-[#44485f]')]">{{ item.title }} <img :class="['w-6 h-6 transition-transform ease-in-out', (!item_index ? 'rotate-180' : 'rotate-90'), (!item.children ? 'opacity-0' : '')]" :src="sublist" alt=""></p>
+                    <p :class="['flex items-center items-center font-medium text-[1.05rem]', (!item_index ? 'text-[#275d3c]' : 'text-[#44485f]')]">
+                        {{ item.title }} 
+                        <badge v-if="item.badge" text="New" :status="item.badge === true ? 'primary' : item.badge.toString()"/>
+                    </p>
+                    <img :class="['w-6 h-6 transition-transform ease-in-out', (!item_index ? 'rotate-180' : 'rotate-90'), (!item.children ? 'opacity-0' : '')]" :src="sublist" alt="">
                 </div>
 
                 <!-- 二级栏目外 -->
@@ -32,24 +36,22 @@
 <script setup lang="ts">
 import sublist from "@/components/icons/base64/IconSublist";
 import { onMounted, type PropType } from "vue";
+import badge from "@/components/badge/badge.vue";
 
 export interface SidebarData {
     /* 侧边栏物品的标题 */ 
     title: string
     /* 侧边栏物品的点击URL，不需要时则需赋值为# */ 
     url: string
+    badge?: String | Boolean
     /* 子对象 */ 
     children?: SidebarData[]
 }
 
 const props = defineProps({
-    first: Boolean,
     data: Object as PropType<SidebarData[]>,
 });
 
-function calc_h_rem(count: number):string {
-    return `${(36 * count + 4 * (count - 1)) / 16}rem`;
-}
 /* 高度切换 */ 
 function h_toggle(style: CSSStyleDeclaration, preresult: string):void {
     const duration_time = parseFloat(preresult) * 16 * 2.8;
