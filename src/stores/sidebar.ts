@@ -566,5 +566,19 @@ export const useSidebarStore = defineStore("sidebar", () => {
     },
   ]);
 
-  return { data };
+  const unActiveTextColor = ref<string>("text-[#434861]");
+  const activeTextColor = ref<string>("text-[#275d3c]");
+  const unActiveBgColor = ref<string>("hover:bg-[#eaeaea]");
+  const activeBgColor = ref<string>("bg-[#cbf0df]");
+
+  const defaultArticle = ref<string>("/guides/overview/why-cypress");
+
+  return {
+    data,
+    unActiveTextColor,
+    activeTextColor,
+    unActiveBgColor,
+    activeBgColor,
+    defaultArticle,
+  };
 });

@@ -2,10 +2,14 @@
 <template>
   <li v-if="item" :class="$props.rootClass">
     <div
-      class="flex justify-between px-3 py-1 mb-1 hover:bg-[#eaeaea] transition-colors ease-in-out rounded cursor-pointer"
+      class="flex justify-between px-3 py-1 mb-1 transition-colors ease-in-out rounded cursor-pointer"
+      :class="[
+        checkIndexIsAllZero(index) && !hasMultipChildren()
+          ? 'bg-[#cbf0df]'
+          : 'hover:bg-[#eaeaea]',
+      ]"
       :data-url="item.url"
     >
-      <!-- text-[#275d3c] -->
       <p
         :class="[
           'flex items-center font-medium text-[1.1rem]',
@@ -24,7 +28,7 @@
         :class="[
           'w-6 h-6 transition-transform ease-in-out',
           !index[0] ? 'rotate-180' : 'rotate-90',
-          hasMlulpChildren() ? 'opacity-1' : 'opacity-0',
+          hasMultipChildren() ? 'opacity-1' : 'opacity-0',
         ]"
         :src="sublist"
         alt=""
@@ -42,7 +46,7 @@ import badge from "@/components/badge/badge.vue";
 import { ref } from "vue";
 
 const img = ref();
-const hasMlulpChildren = (): boolean => {
+const hasMultipChildren = (): boolean => {
   return img.value?.parentElement?.parentElement?.children.length > 1
     ? true
     : false;
