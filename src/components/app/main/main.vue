@@ -2,7 +2,7 @@
 <template>
   <main class="flex justify-between h-full pt-16">
     <section
-      class="border-r border-[#dddfe7] h-full p-2 pr-0 w-[300px] bg-[#f7f7f7] overflow-auto overflow-x-hidden"
+      class="border-r border-[#dddfe7] h-full p-2 pr-0 w-[300px] bg-[#f7f7f7] overflow-auto overflow-x-hidden scroll-s-cypress"
     >
       <div class="w-[285px] p-3">
         <sidebar :data="sidebarStore.data" />
