@@ -1,23 +1,52 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-    <li v-if="item" :class="$props.rootClass">
-        <div class="flex justify-between px-3 py-1 mb-1 hover:bg-[#eaeaea] transition-colors ease-in-out rounded cursor-pointer" :data-url="item.url">
-            <!-- text-[#275d3c] -->
-            <p :class="['flex items-center font-medium text-[1.1rem]', (!index ? 'text-[#275d3c]' : 'text-[#434861]')]">
-                {{ item.title }} 
-                <badge v-if="item?.badge" text="New" :status="item.badge === true ? 'primary' : item.badge.toString()"/>
-            </p>
-            <img :class="['w-6 h-6 transition-transform ease-in-out', (!index ? 'rotate-180' : 'rotate-90'), (!$slots.default ? 'opacity-0' : '')]" :src="sublist" alt="">
-        </div>
+  <li v-if="item" :class="$props.rootClass">
+    <div
+      class="flex justify-between px-3 py-1 mb-1 hover:bg-[#eaeaea] transition-colors ease-in-out rounded cursor-pointer"
+      :data-url="item.url"
+    >
+      <!-- text-[#275d3c] -->
+      <p
+        :class="[
+          'flex items-center font-medium text-[1.1rem]',
+          !index ? 'text-[#275d3c]' : 'text-[#434861]',
+        ]"
+      >
+        {{ item.title }}
+        <badge
+          v-if="item?.badge"
+          text="New"
+          :status="item.badge === true ? 'primary' : item.badge.toString()"
+        />
+      </p>
+      <img
+        ref="img"
+        :class="[
+          'w-6 h-6 transition-transform ease-in-out',
+          !index ? 'rotate-180' : 'rotate-90',
+          hasMlulpChildren() ? 'opacity-1' : 'opacity-0',
+        ]"
+        :src="sublist"
+        alt=""
+      />
+    </div>
 
-        <slot></slot>
-    </li>
+    <slot></slot>
+  </li>
 </template>
 
 <script lang="ts" setup>
 import { itemProps } from "./item";
 import sublist from "@/components/icons/base64/IconSublist";
 import badge from "@/components/badge/badge.vue";
+import { ref } from "vue";
+
+const img = ref();
+const hasMlulpChildren = (): boolean => {
+  return img.value?.parentElement?.parentElement?.children.length > 1
+    ? true
+    : false;
+};
 
 const { index, item } = defineProps(itemProps);
 </script>
