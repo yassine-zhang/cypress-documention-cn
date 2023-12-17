@@ -5,7 +5,7 @@
       v-for="(item, index) in props.data"
       :key="item.title"
       :item="item"
-      :index="index"
+      :index="[index]"
     >
       <ul
         v-if="item.children"
@@ -16,7 +16,7 @@
           v-for="(two, two_i) in item.children"
           :key="two.title"
           :item="two"
-          :index="two_i"
+          :index="[index, two_i]"
         >
           <ul
             v-if="two.children"
@@ -27,7 +27,7 @@
               v-for="(three, three_i) in two.children"
               :key="three.title"
               :item="three"
-              :index="three_i"
+              :index="[index, two_i, three_i]"
             >
             </item>
           </ul>
@@ -91,7 +91,6 @@ function collpase(): void {
         : "";
     }
   });
-  console.log(items_final);
 
   // 绑定点击事件
   items_final.forEach((ele) => {
@@ -108,7 +107,10 @@ function collpase(): void {
         undefined;
       const subitem_resolve: Record<string, Function> = {
         true: () => {
-          console.log(findAllParentElements(subitem, ".sublist", 8));
+          // Clears the height of the specified parent element.
+          findAllParentElements(subitem, ".sublist", 8).forEach((ele) => {
+            ele.style.height = "";
+          });
           // 每次点击事件都会进行控制子列表展开与隐藏
           h_toggle(subitem.style, `${subitem.scrollHeight / 16}rem`);
         },

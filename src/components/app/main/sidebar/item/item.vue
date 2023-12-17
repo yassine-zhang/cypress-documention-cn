@@ -9,7 +9,7 @@
       <p
         :class="[
           'flex items-center font-medium text-[1.1rem]',
-          !index ? 'text-[#275d3c]' : 'text-[#434861]',
+          checkIndexIsAllZero(index) ? 'text-[#275d3c]' : 'text-[#434861]',
         ]"
       >
         {{ item.title }}
@@ -23,7 +23,7 @@
         ref="img"
         :class="[
           'w-6 h-6 transition-transform ease-in-out',
-          !index ? 'rotate-180' : 'rotate-90',
+          !index[0] ? 'rotate-180' : 'rotate-90',
           hasMlulpChildren() ? 'opacity-1' : 'opacity-0',
         ]"
         :src="sublist"
@@ -49,4 +49,7 @@ const hasMlulpChildren = (): boolean => {
 };
 
 const { index, item } = defineProps(itemProps);
+const checkIndexIsAllZero = (num: Array<Number>): boolean => {
+  return num.filter((val) => val != 0).length === 0;
+};
 </script>

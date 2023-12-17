@@ -11,8 +11,8 @@ export interface ItemData {
 }
 export const itemProps = {
   index: {
-    type: Number,
-    default: 0,
+    type: Array<Number>,
+    default: [0],
   },
   item: {
     type: Object as PropType<ItemData>,
