@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <header class="h-16 bg-[#1c1e2d] fixed w-full px-8 flex items-center">
+  <header class="h-16 bg-[#1c1e2d] fixed w-full px-8 flex items-center z-50">
     <section class="w-full flex justify-between items-center">
       <div class="flex items-center">
         <a class="mr-4" href="/"
