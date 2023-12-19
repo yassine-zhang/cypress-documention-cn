@@ -3,6 +3,7 @@
   <main class="flex justify-between h-full pt-16">
     <section
       class="border-r border-[#dddfe7] h-full p-2 pr-0 w-[300px] bg-[#f7f7f7] overflow-auto overflow-x-hidden scroll-s-cypress"
+      ref="sidebarRootElement"
     >
       <div class="w-[285px] p-3">
         <sidebar :data="sidebarStore.data" />
@@ -19,6 +20,13 @@
 <script lang="ts" setup>
 import sidebar from "@/components/app/main/sidebar/sidebar.vue";
 import { useSidebarStore } from "@/stores/sidebar";
+import { onMounted, ref } from "vue";
+import { autoCtrlSidebarBorder } from "./main";
 
 const sidebarStore = useSidebarStore();
+const sidebarRootElement = ref<Element>();
+
+onMounted(() => {
+  autoCtrlSidebarBorder(sidebarRootElement.value as Element, "border-r");
+});
 </script>
