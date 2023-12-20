@@ -6,19 +6,24 @@
       ref="sidebarRootElement"
     >
       <div class="w-[285px] p-3">
-        <sidebar :data="sidebarStore.data" />
+        <cy_sidebar :data="sidebarStore.data" />
       </div>
     </section>
-    <section class="flex justify-center flex-1 p-4 pb-8">
-      <div class="w-5/6 px-4">2</div>
-      <section class="border-l border-[#dddfe7] w-1/6 h-1/5 mx-4">
-        <div class="p-2 pr-0">3</div>
+    <section class="flex justify-center flex-1 p-4 pb-8 pr-0">
+      <div class="flex-1 px-4">2</div>
+      <section
+        class="w-[16.42rem] mx-4 overflow-auto overflow-x-hidden scroll-s-cypress"
+      >
+        <div class="p-2 pr-0 border-l border-[#dddfe7]">
+          <cy_aside />
+        </div>
       </section>
     </section>
   </main>
 </template>
 <script lang="ts" setup>
-import sidebar from "@/components/app/main/sidebar/sidebar.vue";
+import cy_sidebar from "@/components/app/main/sidebar/sidebar.vue";
+import cy_aside from "@/components/app/main/aside/aside.vue";
 import { useSidebarStore } from "@/stores/sidebar";
 import { onMounted, ref } from "vue";
 import { autoCtrlSidebarBorder } from "./main";
