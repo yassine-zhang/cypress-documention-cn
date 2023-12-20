@@ -5,15 +5,16 @@
       class="flex justify-between px-3 py-1 mb-1 transition-colors ease-in-out rounded cursor-pointer"
       :class="[
         checkIndexIsAllZero(index) && !hasMultipChildren()
-          ? 'bg-[#cbf0df]'
+          ? 'bg-[#c2f1de]'
           : 'hover:bg-[#eaeaea]',
       ]"
       :data-url="item.url"
     >
       <p
+        class="flex items-center font-medium"
         :class="[
-          'flex items-center font-medium text-[1.1rem]',
           checkIndexIsAllZero(index) ? 'text-[#275d3c]' : 'text-[#434861]',
+          isRootLevel(index) ? 'text-[1.1rem]' : '',
         ]"
       >
         {{ item.title }}
@@ -55,5 +56,9 @@ const hasMultipChildren = (): boolean => {
 const { index, item } = defineProps(itemProps);
 const checkIndexIsAllZero = (num: Array<Number>): boolean => {
   return num.filter((val) => val != 0).length === 0;
+};
+
+const isRootLevel = (num: Array<Number>): boolean => {
+  return num.length === 1;
 };
 </script>

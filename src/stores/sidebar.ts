@@ -569,7 +569,7 @@ export const useSidebarStore = defineStore("sidebar", () => {
   const unActiveTextColor = ref<string>("text-[#434861]");
   const activeTextColor = ref<string>("text-[#275d3c]");
   const unActiveBgColor = ref<string>("hover:bg-[#eaeaea]");
-  const activeBgColor = ref<string>("bg-[#cbf0df]");
+  const activeBgColor = ref<string>("bg-[#c2f1de]");
 
   const defaultArticle = ref<string>("/guides/overview/why-cypress");
 
